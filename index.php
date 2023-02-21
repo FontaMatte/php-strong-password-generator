@@ -1,5 +1,7 @@
 <?php
 
+    session_start();
+
     include __DIR__ .  '/function.php';
 
 ?>
@@ -33,15 +35,16 @@
 
             <div>
 
-                <h2>
-                    Password generata:
-                </h2>
                 <?php
-                    if (isset($_GET['password-length'])) {
+                    if (isset($_GET['password-length']) && ($_GET['password-length'] != '')) {
 
-                        randomPassword($_GET['password-length']); 
+                        $password = randomPassword($_GET['password-length']); 
 
-                    }
+                        $_SESSION['password']= $password;
+
+                        header('Location: ./password.php');
+
+                    }                
                 ?>
 
             </div>
